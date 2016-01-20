@@ -19,6 +19,7 @@
 (defroutes my-routes
            (GET "/test" [] "okay")
            (GET "/boom" [] (throw (Exception. "boom!" (Exception. "original cause"))))
+           (GET "/megaboom" [] (assert false))
            (route/not-found "Url not found"))
 
 (deftest ok-log-msg
@@ -28,6 +29,10 @@
 (deftest fail-log-msg
   (is (= "Completing :post /bad in 11.1 ms, status 400"
          (log-wrappers/make-log-msg (mock/request :post "/bad") fail-response-stub 11.09422))))
+
+(deftest survive-null-values
+  (is (= "Completing null null in 11.1 ms, status null"
+         (log-wrappers/make-log-msg nil nil 11.09422))))
 
 (deftest request-passes-through-request-logger
   (is (= "okay"
@@ -63,6 +68,14 @@
                     response-body))
     (is (re-find #"(?m)^Caused by: java.lang.Exception: original cause$"
                     response-body))))
+
+(deftest error-causes-500-response
+  (let [response ((log-wrappers/exception-logging my-routes) (mock/request :get "/megaboom"))
+        response-body (response :body)]
+    (is (= 500 (response :status)))
+    (println response-body)
+    (is (re-find #"(?m)^internal server error \(send this error id to a developer:.*\)$"
+                 response-body))))
 
 (deftest log-exception
   (let [log-posts (transient [])
@@ -111,4 +124,4 @@
     (is (= "boom!" (.getMessage (last exception-log-post))))
 
     (is (= :info (first response-log-post)))
-    (is (re-matches #"Completing :get /boom in \d\.\d* ms, status 500" (second response-log-post)))))
+    (is (re-matches #"Completing :get /boom in \d+\.\d* ms, status 500" (second response-log-post)))))
