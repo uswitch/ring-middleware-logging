@@ -1,5 +1,6 @@
 (ns ring-middleware-logging.log-wrappers
-  (:require [clojure.tools.logging :as log])
+  (:require [clojure.tools.logging :as log]
+            [clojure.stacktrace])
   (:import (java.util UUID)))
 
 (defn exception-logging
