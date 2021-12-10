@@ -1,4 +1,4 @@
-(defproject uswitch/ring-middleware-logging "0.1.4"
+(defproject uswitch/ring-middleware-logging "0.1.5"
   :description "Ring wrappers to log requests and exception to clojure.tools/logging"
   :url "https://github.com/uswitch/ring-middleware-logging"
   :license {:name "Eclipse Public License"
