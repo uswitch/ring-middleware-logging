@@ -7,7 +7,7 @@ Ring wrappers to log requests and exceptions to clojure.tools/logging
 Import it into your ring project by adding this to your project.clj:
 
 ```clojure
-[uswitch/ring-middleware-logging "0.1.4"]
+[uswitch/ring-middleware-logging "0.1.5"]
 ```
 
 You then only need to add the middleware to your ring handler, e.g:
@@ -39,4 +39,4 @@ along with an error id that can be grepped for in the logs.
 
 ## Deployment
 - Manually increment the version number in project.clj
-- ```lein deploy clojars```
+- drone build will release to internal jars
