@@ -39,4 +39,4 @@ along with an error id that can be grepped for in the logs.
 
 ## Deployment
 - Manually increment the version number in project.clj
-- ```lein deploy clojars```
+- drone build will release to internal jars
