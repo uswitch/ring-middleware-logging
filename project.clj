@@ -6,7 +6,7 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [compojure "1.1.3"]
                  [org.clojure/tools.logging "0.3.1"]
-                 [org.apache.logging.log4j/log4j-core "2.15.0"] ;; Warning log4j < 2.15 has vulnerability CVE-2021-44228
+                 [org.apache.logging.log4j/log4j-core "2.16.0"] ;; Warning log4j < 2.16 has vulnerability CVE-2021-44228
                  [ring/ring-mock "0.3.0"]]
   :plugins [[s3-wagon-private "1.3.4" :exclusions [commons-logging com.fasterxml.jackson.core/jackson-databind]]
             [commons-logging "1.2"]
