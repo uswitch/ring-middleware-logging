@@ -27,5 +27,4 @@
                  {:url           "s3p://uswitch-internal-jars/snapshots"
                   :sign-releases false
                   :no-auth       true}}
-  :lein-release {:deploy-via "s3-releases"}
-  :dependency-overrides {org.clojure/tools.logging "1.2.4"})
+  :lein-release {:deploy-via "s3-releases"})
