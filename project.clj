@@ -8,6 +8,12 @@
                  [org.clojure/tools.logging "0.3.1"]
                  [org.apache.logging.log4j/log4j-core "2.25.1"]
                  [ring/ring-mock "0.3.0"]
+
+                 ;; this is a transitive depdendency of compojure. We
+                 ;; include it this way rather than
+                 ;; using :dependency-overrides as we are using Snyk
+                 ;; to test the pom.xml and the override is lost when
+                 ;; running lein pom
                  [org.apache.commons/commons-fileupload2-core "2.0.0-M4"]]
   :plugins [[s3-wagon-private "1.3.4" :exclusions [commons-logging com.fasterxml.jackson.core/jackson-databind]]
             [commons-logging "1.2"]
@@ -21,4 +27,5 @@
                  {:url           "s3p://uswitch-internal-jars/snapshots"
                   :sign-releases false
                   :no-auth       true}}
-  :lein-release {:deploy-via "s3-releases"})
+  :lein-release {:deploy-via "s3-releases"}
+  :dependency-overrides {org.clojure/tools.logging "1.2.4"})
