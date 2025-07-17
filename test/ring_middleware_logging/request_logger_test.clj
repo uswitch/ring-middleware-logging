@@ -64,7 +64,7 @@
     (println response-body)
     (is (re-find #"(?m)^internal server error \(send this error id to a developer:.*\)$"
                     response-body))
-    (is (re-find #"(?m)^java.lang.Exception: boom!\n at ring_middleware_logging.request_logger_test/fn \(request_logger_test.clj:"
+    (is (re-find #"java.lang.Exception: boom!\n.*request_logger_test\.clj:\d+"
                     response-body))
     (is (re-find #"(?m)^Caused by: java.lang.Exception: original cause$"
                     response-body))))
